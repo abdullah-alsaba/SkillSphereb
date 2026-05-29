@@ -84,7 +84,11 @@ export default function Navbar() {
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                 {user.image ? (
-                  <image src={user.image} alt={user.name} />
+                  <img
+                    src={user.image}
+                    alt={user.name}
+                    className="rounded-full w-10 h-10 object-cover"
+                  />
                 ) : (
                   <div className="bg-primary text-primary-content w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold">
                     {user.name?.charAt(0).toUpperCase()}
