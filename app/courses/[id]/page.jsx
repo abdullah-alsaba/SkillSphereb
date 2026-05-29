@@ -27,7 +27,7 @@ export default function CourseDetailsPage({ params }) {
 
       <div className="max-w-5xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div className="lg:col-span-2">
-          <h2 className="text-2xl font-bold mb-4">What You'll Learn</h2>
+          <h2 className="text-2xl font-bold mb-4">What You will Learn</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
             {course.learningOutcomes?.map((item, i) => (
               <li key={i} className="flex items-start gap-2">
