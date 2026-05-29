@@ -10,7 +10,7 @@
     "duration": "42 hours",
     "level": "Beginner",
     "price": 49.99,
-    "image": "https://i.ibb.co/8LzQK6x/web-dev.jpg",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600",
     "lastUpdated": "May 2025",
     "language": "English",
     "learningOutcomes": [
@@ -49,13 +49,13 @@
     "duration": "30 hours",
     "level": "Intermediate",
     "price": 44.99,
-    "image": "https://i.ibb.co/8LzQK6x/web-dev.jpg",
+    "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600",
     "lastUpdated": "April 2025",
     "language": "English",
     "learningOutcomes": [
       "Design with Figma professionally",
       "Understand UX research methods",
-      "Create wireframes and prototypes",
+      "Create wireframe and prototypes",
       "Build a strong design portfolio"
     ],
     "curriculum": [
@@ -84,7 +84,7 @@
     "duration": "22 hours",
     "level": "Beginner",
     "price": 39.99,
-    "image": "https://i.ibb.co/8LzQK6x/web-dev.jpg",
+    "image": "https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=600",
     "lastUpdated": "March 2025",
     "language": "English",
     "learningOutcomes": [
@@ -123,7 +123,7 @@
     "duration": "38 hours",
     "level": "Intermediate",
     "price": 54.99,
-    "image": "https://i.ibb.co/8LzQK6x/web-dev.jpg",
+    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600",
     "lastUpdated": "May 2025",
     "language": "English",
     "learningOutcomes": [
@@ -162,7 +162,7 @@
     "duration": "35 hours",
     "level": "Intermediate",
     "price": 49.99,
-    "image": "https://i.ibb.co/8LzQK6x/web-dev.jpg",
+    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600",
     "lastUpdated": "May 2025",
     "language": "English",
     "learningOutcomes": [
@@ -197,7 +197,7 @@
     "duration": "20 hours",
     "level": "Beginner",
     "price": 34.99,
-    "image": "https://i.ibb.co/8LzQK6x/web-dev.jpg",
+    "image": "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=600",
     "lastUpdated": "February 2025",
     "language": "English",
     "learningOutcomes": [
@@ -232,7 +232,7 @@
     "duration": "18 hours",
     "level": "Beginner",
     "price": 29.99,
-    "image": "https://i.ibb.co/8LzQK6x/web-dev.jpg",
+    "image": "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=600",
     "lastUpdated": "April 2025",
     "language": "English",
     "learningOutcomes": [
@@ -267,7 +267,7 @@
     "duration": "50 hours",
     "level": "Advanced",
     "price": 64.99,
-    "image": "https://i.ibb.co/8LzQK6x/web-dev.jpg",
+    "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600",
     "lastUpdated": "May 2025",
     "language": "English",
     "learningOutcomes": [
