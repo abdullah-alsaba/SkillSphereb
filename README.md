@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SkillSphere – Online Learning Platform
+
+A modern online learning platform built with Next.js where users can explore courses, enroll in skill-based programs, and manage their learning journey.
+
+## Live Demo
+
+[https://skillsphere.vercel.app](https://skillsphere.vercel.app)
+
+## Features
+
+- Browse and search courses by title and category
+- Course details page with curriculum and learning outcomes
+- User authentication with email/password and Google OAuth
+- Protected routes for course details and profile pages
+- User profile page with stats and progress
+- Update profile with name and photo
+- Toast notifications for success and error feedback
+- Loading states and skeleton loaders
+- Custom 404 page
+- Fully responsive for mobile, tablet, and desktop
+
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Styling:** Tailwind CSS + DaisyUI
+- **Authentication:** BetterAuth
+- **Notifications:** React Toastify
+- **Language:** JavaScript (JSX)
+
+## Pages
+
+| Page | Route | Protected |
+|------|-------|-----------|
+| Home | `/` | No |
+| All Courses | `/courses` | No |
+| Course Details | `/courses/[id]` | Yes |
+| Login | `/login` | No |
+| Register | `/register` | No |
+| Profile | `/profile` | Yes |
+| Update Profile | `/profile/update` | Yes |
+| Not Found | `*` | No |
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/skillsphere.git
+cd skillsphere
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env.local` file in the root:
+
+```env
+BETTER_AUTH_SECRET=your_32_character_secret_here
+BETTER_AUTH_URL=http://localhost:3000
+NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3000
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Google OAuth Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Go to [Google Cloud Console](https://console.cloud.google.com)
+2. Create a new project
+3. Navigate to APIs & Services → Credentials
+4. Create OAuth 2.0 Client ID → Web application
+5. Add `http://localhost:3000/api/auth/callback/google` as an authorized redirect URI
+6. Copy the Client ID and Secret into `.env.local`
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+skillsphere/
+├── app/
+│   ├── api/auth/[...all]/route.js
+│   ├── courses/
+│   │   ├── [id]/page.jsx
+│   │   └── page.jsx
+│   ├── login/page.jsx
+│   ├── register/page.jsx
+│   ├── profile/
+│   │   ├── page.jsx
+│   │   └── update/page.jsx
+│   ├── layout.jsx
+│   ├── page.jsx
+│   ├── loading.jsx
+│   └── not-found.jsx
+├── components/
+│   ├── Navbar.jsx
+│   ├── Footer.jsx
+│   └── CourseCard.jsx
+├── data/
+│   └── courses.json
+├── lib/
+│   ├── auth.js
+│   └── auth-client.js
+├── middleware.js
+└── next.config.js
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project was built as an academic assignment. All rights reserved.
