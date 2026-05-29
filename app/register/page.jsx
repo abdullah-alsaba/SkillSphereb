@@ -3,8 +3,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
-export default function LoginPage() {
-  const [form, setForm] = useState({ email: "", password: "" });
+export default function RegisterPage() {
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -15,10 +15,10 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      // BetterAuth email login will be wired here
-      toast.success("Logged in successfully!");
+      // BetterAuth register will be wired here
+      toast.success("Account created successfully!");
     } catch {
-      toast.error("Login failed. Please try again.");
+      toast.error("Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -27,12 +27,27 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-base-200 px-4">
       <div className="card bg-base-100 shadow-xl w-full max-w-md p-8">
-        <h1 className="text-3xl font-bold text-center mb-2">Welcome Back</h1>
+        <h1 className="text-3xl font-bold text-center mb-2">Create Account</h1>
         <p className="text-center text-base-content/60 mb-6">
-          Login to continue learning
+          Join thousands of learners today
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text font-medium">Full Name</span>
+            </label>
+            <input
+              type="text"
+              name="name"
+              placeholder="John Doe"
+              className="input input-bordered w-full"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
           <div className="form-control">
             <label className="label">
               <span className="label-text font-medium">Email</span>
@@ -68,7 +83,11 @@ export default function LoginPage() {
             className="btn btn-primary w-full mt-2"
             disabled={loading}
           >
-            {loading ? <span className="loading loading-spinner" /> : "Login"}
+            {loading ? (
+              <span className="loading loading-spinner" />
+            ) : (
+              "Create Account"
+            )}
           </button>
         </form>
 
@@ -84,9 +103,9 @@ export default function LoginPage() {
         </button>
 
         <p className="text-center text-sm mt-6 text-base-content/60">
-          Don't have an account?
-          <Link href="/auth/register" className="text-primary font-medium">
-            Register
+          Already have an account?{" "}
+          <Link href="/login" className="text-primary font-medium">
+            Login
           </Link>
         </p>
       </div>

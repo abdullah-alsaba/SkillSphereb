@@ -3,8 +3,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
-export default function RegisterPage() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+export default function LoginPage() {
+  const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -15,10 +15,10 @@ export default function RegisterPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      // BetterAuth register will be wired here
-      toast.success("Account created successfully!");
+      // BetterAuth email login will be wired here
+      toast.success("Logged in successfully!");
     } catch {
-      toast.error("Registration failed. Please try again.");
+      toast.error("Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -27,27 +27,12 @@ export default function RegisterPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-base-200 px-4">
       <div className="card bg-base-100 shadow-xl w-full max-w-md p-8">
-        <h1 className="text-3xl font-bold text-center mb-2">Create Account</h1>
+        <h1 className="text-3xl font-bold text-center mb-2">Welcome Back</h1>
         <p className="text-center text-base-content/60 mb-6">
-          Join thousands of learners today
+          Login to continue learning
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text font-medium">Full Name</span>
-            </label>
-            <input
-              type="text"
-              name="name"
-              placeholder="John Doe"
-              className="input input-bordered w-full"
-              value={form.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
           <div className="form-control">
             <label className="label">
               <span className="label-text font-medium">Email</span>
@@ -83,11 +68,7 @@ export default function RegisterPage() {
             className="btn btn-primary w-full mt-2"
             disabled={loading}
           >
-            {loading ? (
-              <span className="loading loading-spinner" />
-            ) : (
-              "Create Account"
-            )}
+            {loading ? <span className="loading loading-spinner" /> : "Login"}
           </button>
         </form>
 
@@ -103,9 +84,9 @@ export default function RegisterPage() {
         </button>
 
         <p className="text-center text-sm mt-6 text-base-content/60">
-          Already have an account?{" "}
-          <Link href="/auth/login" className="text-primary font-medium">
-            Login
+          Don't have an account?
+          <Link href="/register" className="text-primary font-medium">
+            Register
           </Link>
         </p>
       </div>
