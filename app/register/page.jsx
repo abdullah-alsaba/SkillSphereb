@@ -1,11 +1,14 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 export default function RegisterPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,14 +17,22 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      // BetterAuth register will be wired here
-      toast.success("Account created successfully!");
-    } catch {
-      toast.error("Registration failed. Please try again.");
-    } finally {
-      setLoading(false);
+    const { error } = await authClient.signUp.email({
+      name: form.name,
+      email: form.email,
+      password: form.password,
+    });
+    if (error) {
+      toast.error(error.message || "Registration failed.");
+    } else {
+      toast.success("Account created! Please login.");
+      router.push("/login");
     }
+    setLoading(false);
+  };
+
+  const handleGoogle = async () => {
+    await authClient.signIn.social({ provider: "google" });
   };
 
   return (
@@ -93,7 +104,10 @@ export default function RegisterPage() {
 
         <div className="divider">OR</div>
 
-        <button className="btn btn-outline w-full flex gap-2">
+        <button
+          onClick={handleGoogle}
+          className="btn btn-outline w-full flex gap-2"
+        >
           <image
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             className="w-5 h-5"

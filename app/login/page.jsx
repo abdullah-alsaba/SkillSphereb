@@ -1,11 +1,14 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,14 +17,21 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      // BetterAuth email login will be wired here
+    const { error } = await authClient.signIn.email({
+      email: form.email,
+      password: form.password,
+    });
+    if (error) {
+      toast.error(error.message || "Login failed.");
+    } else {
       toast.success("Logged in successfully!");
-    } catch {
-      toast.error("Login failed. Please try again.");
-    } finally {
-      setLoading(false);
+      router.push("/");
     }
+    setLoading(false);
+  };
+
+  const handleGoogle = async () => {
+    await authClient.signIn.social({ provider: "google" });
   };
 
   return (
@@ -74,7 +84,10 @@ export default function LoginPage() {
 
         <div className="divider">OR</div>
 
-        <button className="btn btn-outline w-full flex gap-2">
+        <button
+          onClick={handleGoogle}
+          className="btn btn-outline w-full flex gap-2"
+        >
           <image
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             className="w-5 h-5"
@@ -84,7 +97,7 @@ export default function LoginPage() {
         </button>
 
         <p className="text-center text-sm mt-6 text-base-content/60">
-          Don't have an account?
+          Don't have an account?{" "}
           <Link href="/register" className="text-primary font-medium">
             Register
           </Link>
