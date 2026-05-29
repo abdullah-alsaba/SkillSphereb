@@ -1,118 +1,135 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    authClient.getSession().then(({ data }) => {
+      if (data?.user) setUser(data.user);
+    });
+  }, []);
+
+  const handleLogout = async () => {
+    await authClient.signOut();
+    setUser(null);
+    router.push("/login");
+  };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-slate-100">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-orange-500">
-          SkillSphere
-        </Link>
-
-        <div className="hidden md:flex items-center gap-8">
-          <Link
-            href="/"
-            className="text-sm font-medium text-slate-700 hover:text-orange-500"
-          >
-            Home
-          </Link>
-          <Link
-            href="/courses"
-            className="text-sm font-medium text-slate-700 hover:text-orange-500"
-          >
-            Courses
-          </Link>
-          <Link
-            href="/profile"
-            className="text-sm font-medium text-slate-700 hover:text-orange-500"
-          >
-            My Profile
-          </Link>
-        </div>
-
-        <div className="hidden md:flex items-center gap-3">
-          <Link
-            href="/login"
-            className="text-sm font-medium text-slate-700 hover:text-orange-500"
-          >
-            Login
-          </Link>
-          <Link
-            href="/register"
-            className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-5 py-2 rounded-lg"
-          >
-            Register
-          </Link>
-        </div>
-
-        <button className="md:hidden" onClick={() => setOpen(!open)}>
-          <svg
-            className="h-6 w-6 text-slate-700"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            {open ? (
+    <nav className="navbar bg-base-100 shadow-sm px-4 lg:px-12 sticky top-0 z-50">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
               />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
+            </svg>
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/courses">All Courses</Link>
+            </li>
+            {user && (
+              <li>
+                <Link href="/profile">Profile</Link>
+              </li>
             )}
-          </svg>
-        </button>
+          </ul>
+        </div>
+        <Link href="/" className="text-2xl font-black text-primary">
+          Skill<span className="text-base-content">Sphere</span>
+        </Link>
       </div>
 
-      {open && (
-        <div className="md:hidden bg-white border-t border-slate-100 px-4 pb-4 flex flex-col gap-3 pt-3">
-          <Link
-            href="/"
-            className="text-sm font-medium text-slate-700"
-            onClick={() => setOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            href="/courses"
-            className="text-sm font-medium text-slate-700"
-            onClick={() => setOpen(false)}
-          >
-            Courses
-          </Link>
-          <Link
-            href="/profile"
-            className="text-sm font-medium text-slate-700"
-            onClick={() => setOpen(false)}
-          >
-            My Profile
-          </Link>
-          <Link
-            href="/login"
-            className="text-sm font-medium text-slate-700"
-            onClick={() => setOpen(false)}
-          >
-            Login
-          </Link>
-          <Link
-            href="/register"
-            className="bg-orange-500 text-white text-sm font-semibold px-5 py-2 rounded-lg text-center"
-            onClick={() => setOpen(false)}
-          >
-            Register
-          </Link>
-        </div>
-      )}
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1 gap-1">
+          <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
+            <Link href="/courses">All Courses</Link>
+          </li>
+          {user && (
+            <li>
+              <Link href="/profile">Profile</Link>
+            </li>
+          )}
+        </ul>
+      </div>
+
+      <div className="navbar-end gap-3">
+        {user ? (
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                {user.image ? (
+                  <image src={user.image} alt={user.name} />
+                ) : (
+                  <div className="bg-primary text-primary-content w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold">
+                    {user.name?.charAt(0).toUpperCase()}
+                  </div>
+                )}
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li className="menu-title px-4 py-2">
+                <span className="font-semibold text-base-content">
+                  {user.name}
+                </span>
+                <span className="text-xs text-base-content/50">
+                  {user.email}
+                </span>
+              </li>
+              <div className="divider my-0" />
+              <li>
+                <Link href="/profile">My Profile</Link>
+              </li>
+              <li>
+                <Link href="/profile/update">Update Profile</Link>
+              </li>
+              <div className="divider my-0" />
+              <li>
+                <button onClick={handleLogout} className="text-error">
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <>
+            <Link href="/login" className="btn btn-ghost btn-sm">
+              Login
+            </Link>
+            <Link href="/register" className="btn btn-primary btn-sm">
+              Get Started
+            </Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }
