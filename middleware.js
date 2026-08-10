@@ -8,7 +8,9 @@ export function middleware(request) {
     pathname.startsWith("/profile") || /^\/courses\/[^/]+$/.test(pathname);
 
   if (isProtected && !session) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(loginUrl);
   }
 
   return NextResponse.next();

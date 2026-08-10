@@ -1,14 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
 
-export default function LoginPage() {
+function LoginForm() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -25,7 +27,7 @@ export default function LoginPage() {
       toast.error(error.message || "Login failed.");
     } else {
       toast.success("Logged in successfully!");
-      router.push("/");
+      router.push(callbackUrl.startsWith("/") ? callbackUrl : "/");
     }
     setLoading(false);
   };
@@ -88,7 +90,7 @@ export default function LoginPage() {
           onClick={handleGoogle}
           className="btn btn-outline w-full flex gap-2"
         >
-          <image
+          <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             className="w-5 h-5"
             alt="Google"
@@ -104,5 +106,19 @@ export default function LoginPage() {
         </p>
       </div>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen flex items-center justify-center bg-base-200">
+          <span className="loading loading-spinner loading-lg" />
+        </main>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }

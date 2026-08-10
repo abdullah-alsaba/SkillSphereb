@@ -53,8 +53,8 @@ const tips = [
 ];
 
 export default function HomePage() {
-  const popular = courses.slice(0, 3);
-  const trending = courses.slice(3, 6);
+  const popular = [...courses].sort((a, b) => b.rating - a.rating).slice(0, 3);
+  const trending = courses.filter((c) => c.trending);
 
   return (
     <main>
@@ -65,7 +65,7 @@ export default function HomePage() {
             <span className="badge badge-outline badge-sm mb-4">
               ✦ NEW COURSES AVAILABLE
             </span>
-            <h1 className="text-5xl lg:text-6xl font-black leading-tight mb-6">
+            <h1 className="text-5xl lg:text-6xl font-black leading-tight mb-6 animate__animated animate__fadeInUp">
               Upgrade Your Skills Today
             </h1>
             <p className="text-base-content/60 text-lg mb-8 max-w-md">

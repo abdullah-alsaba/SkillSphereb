@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
@@ -52,7 +53,7 @@ export default function Navbar() {
             </li>
             {user && (
               <li>
-                <Link href="/profile">Profile</Link>
+                <Link href="/profile">My Profile</Link>
               </li>
             )}
           </ul>

@@ -1,8 +1,10 @@
 import courses from "@/data/courses.json";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
-export default function CourseDetailsPage({ params }) {
-  const course = courses.find((c) => c.id === params.id);
+export default async function CourseDetailsPage({ params }) {
+  const { id } = await params;
+  const course = courses.find((c) => String(c.id) === String(id));
 
   if (!course) return notFound();
 
@@ -63,10 +65,12 @@ export default function CourseDetailsPage({ params }) {
         </div>
 
         <div className="bg-base-200 rounded-2xl p-6 h-fit sticky top-24">
-          <image
+          <Image
             src={course.image}
             alt={course.title}
-            className="rounded-xl w-full object-cover mb-5"
+            width={400}
+            height={240}
+            className="rounded-xl w-full object-cover mb-5 h-48"
           />
           <p className="text-3xl font-bold text-primary mb-4">
             ${course.price}

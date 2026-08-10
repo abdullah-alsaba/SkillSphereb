@@ -6,7 +6,12 @@ import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
 
 export default function RegisterPage() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    image: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -21,6 +26,7 @@ export default function RegisterPage() {
       name: form.name,
       email: form.email,
       password: form.password,
+      image: form.image || undefined,
     });
     if (error) {
       toast.error(error.message || "Registration failed.");
@@ -76,6 +82,20 @@ export default function RegisterPage() {
 
           <div className="form-control">
             <label className="label">
+              <span className="label-text font-medium">Photo URL</span>
+            </label>
+            <input
+              type="url"
+              name="image"
+              placeholder="https://example.com/photo.jpg"
+              className="input input-bordered w-full"
+              value={form.image}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-control">
+            <label className="label">
               <span className="label-text font-medium">Password</span>
             </label>
             <input
@@ -108,7 +128,7 @@ export default function RegisterPage() {
           onClick={handleGoogle}
           className="btn btn-outline w-full flex gap-2"
         >
-          <image
+          <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             className="w-5 h-5"
             alt="Google"
