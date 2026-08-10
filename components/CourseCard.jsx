@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,6 +8,8 @@ export default function CourseCard({ course }) {
       <Image
         src={course.image}
         alt={course.title}
+        width={600}
+        height={400}
         className="w-full h-48 object-cover"
       />
       <div className="p-4 flex flex-col gap-2">

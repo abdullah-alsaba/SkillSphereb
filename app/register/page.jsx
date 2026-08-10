@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
+import Image from "next/image";
 
 export default function RegisterPage() {
   const [form, setForm] = useState({
@@ -38,7 +39,17 @@ export default function RegisterPage() {
   };
 
   const handleGoogle = async () => {
-    await authClient.signIn.social({ provider: "google" });
+    try {
+      const { error } = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      });
+      if (error) {
+        toast.error(error.message || "Google authentication failed.");
+      }
+    } catch (err) {
+      toast.error(err.message || "Google authentication failed.");
+    }
   };
 
   return (
@@ -128,10 +139,12 @@ export default function RegisterPage() {
           onClick={handleGoogle}
           className="btn btn-outline w-full flex gap-2"
         >
-          <img
+          <Image
             src="https://www.svgrepo.com/show/475656/google-color.svg"
-            className="w-5 h-5"
             alt="Google"
+            width={20}
+            height={20}
+            className="w-5 h-5"
           />
           Continue with Google
         </button>

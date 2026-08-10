@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import Image from "next/image";
 
 const badges = [
   {
@@ -33,7 +34,7 @@ export default function ProfilePage() {
       }
       setLoading(false);
     });
-  }, []);
+  }, [router]);
 
   if (loading) {
     return (
@@ -52,8 +53,15 @@ export default function ProfilePage() {
             <div className="relative mb-4">
               <div className="avatar">
                 <div className="w-24 rounded-full ring ring-primary ring-offset-2">
-                  {user?.image ? (
-                    <image src={user.image} alt={user.name} />
+                  {(user?.image || user?.picture) ? (
+                    <Image
+                      src={user?.image || user?.picture}
+                      alt={user?.name || "User"}
+                      width={96}
+                      height={96}
+                      unoptimized
+                      className="w-24 h-24 rounded-full object-cover"
+                    />
                   ) : (
                     <div className="bg-primary text-primary-content w-24 h-24 rounded-full flex items-center justify-center text-3xl font-bold">
                       {user?.name?.charAt(0).toUpperCase()}

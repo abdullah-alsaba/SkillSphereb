@@ -1,6 +1,7 @@
 import Link from "next/link";
 import courses from "@/data/courses.json";
 import CourseCard from "@/components/CourseCard";
+import Image from "next/image";
 
 const instructors = [
   {
@@ -58,7 +59,6 @@ export default function HomePage() {
 
   return (
     <main>
-      {/* Hero */}
       <section className="bg-base-200 py-20 px-4">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
           <div className="flex-1">
@@ -80,16 +80,18 @@ export default function HomePage() {
             </div>
           </div>
           <div className="flex-1 flex justify-center">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600"
               alt="Learning"
+              width={600}
+              height={400}
               className="rounded-2xl shadow-2xl w-full max-w-md object-cover"
             />
           </div>
         </div>
       </section>
 
-      {/* Popular Courses */}
+   
       <section className="py-16 px-4 max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-3xl font-bold">Popular Courses</h2>
@@ -107,7 +109,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trending Courses */}
+    
       <section className="bg-base-200 py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-2">
@@ -127,7 +129,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Learning Tips */}
+     
       <section className="py-16 px-4 max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           <div className="grid grid-cols-2 gap-4 flex-1">
@@ -142,8 +144,8 @@ export default function HomePage() {
           <div className="flex-1">
             <h2 className="text-3xl font-bold mb-4">Effective Learning Tips</h2>
             <p className="text-base-content/60 mb-6">
-              We don't just provide content; we provide a methodology. Our
-              platform is built on neuroscientific principles to ensure your
+              We don&apos;t just provide content; we provide a methodology. Our
+              platform is built on neuroscientist principles to ensure your
               time spent learning is as efficient as possible.
             </p>
             <ul className="space-y-3 mb-6">
@@ -167,7 +169,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Top Instructors */}
+     
       <section className="bg-base-200 py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-2">Learn From The Best</h2>
@@ -180,7 +182,13 @@ export default function HomePage() {
               <div key={i} className="flex flex-col items-center gap-3">
                 <div className="avatar">
                   <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                    <img src={ins.image} alt={ins.name} />
+                    <Image
+                      src={ins.image}
+                      alt={ins.name}
+                      width={96}
+                      height={96}
+                      className="w-24 h-24 rounded-full object-cover"
+                    />
                   </div>
                 </div>
                 <h4 className="font-bold">{ins.name}</h4>
@@ -194,7 +202,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA */}
+      
       <section className="bg-neutral text-neutral-content py-20 px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-4">

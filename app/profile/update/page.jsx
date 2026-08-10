@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 export default function UpdateProfilePage() {
   const [form, setForm] = useState({ name: "", image: "" });
@@ -22,7 +23,7 @@ export default function UpdateProfilePage() {
       }
       setFetching(false);
     });
-  }, []);
+  }, [router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,9 +89,12 @@ export default function UpdateProfilePage() {
 
             {form.image && (
               <div className="flex justify-center">
-                <image
+                <Image
                   src={form.image}
                   alt="Preview"
+                  width={96}
+                  height={96}
+                  unoptimized
                   className="w-24 h-24 rounded-full object-cover border-4 border-primary"
                 />
               </div>

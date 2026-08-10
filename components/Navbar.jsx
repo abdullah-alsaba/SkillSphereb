@@ -84,10 +84,13 @@ export default function Navbar() {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                {user.image ? (
-                  <img
-                    src={user.image}
-                    alt={user.name}
+                {(user.image || user.picture) ? (
+                  <Image
+                    src={user.image || user.picture}
+                    alt={user.name || "User"}
+                    width={40}
+                    height={40}
+                    unoptimized
                     className="rounded-full w-10 h-10 object-cover"
                   />
                 ) : (
