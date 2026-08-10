@@ -1,9 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function CourseCard({ course }) {
   return (
     <div className="card bg-base-100 shadow-md hover:shadow-xl transition-shadow duration-300 rounded-2xl overflow-hidden">
-      <img
+      <Image
         src={course.image}
         alt={course.title}
         className="w-full h-48 object-cover"
