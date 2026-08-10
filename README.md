@@ -4,7 +4,7 @@ A modern online learning platform built with Next.js where users can explore cou
 
 ## Live Demo
 
-[https://skillsphere.vercel.app](https://skillsphere.vercel.app)
+[Live Link](https://skillsphere-omega-neon.vercel.app/)
 
 ## Features
 
